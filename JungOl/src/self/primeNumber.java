@@ -15,7 +15,6 @@ public class primeNumber {
 		
 		for(int k=0; k < Math.sqrt(array.length);k++){
 			
-			if(array[k] )
 			
 		}
 
