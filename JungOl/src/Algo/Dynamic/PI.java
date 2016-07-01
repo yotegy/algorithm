@@ -23,23 +23,21 @@ public class PI {
 			
 			list = in.nextLine().trim().toCharArray();
 			
-//			for(int k=0;k<list.length;k++){
-//				System.out.println(list[k]);
-//			}
-			
 			result = mem(0);
+			
+			for(int k=0;k<list.length;k++){
+				System.out.println("["+k+"]"+cache[k]);
+			}
 			
 			System.out.println(result);
 			
 		}
-		
 		
 		in.close();
 		
 	}
 
 	private static int mem(int i) {
-		
 		
 		int mid = 987654321;
 		
@@ -66,6 +64,8 @@ public class PI {
 	}
 
 	private static int cal(int start, int plus) {
+		
+//		System.out.println(" start "+start+"  , plus "+plus+"   : "+list[start]+"  , "+list[start+plus-1]);
 		
 		// level 1
 		int num=1;
