@@ -1,7 +1,5 @@
 package Support;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Scanner;
@@ -19,7 +17,7 @@ public class CreateDataInt {
 		
 		for(int i =0;i<number;i++){
 			
-			int temp = (int)(Math.random()*10000);
+			int temp = (int)(Math.random()*1000);
 			
 			
 			

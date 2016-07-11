@@ -25,9 +25,9 @@ public class PI {
 			
 			result = mem(0);
 			
-			for(int k=0;k<list.length;k++){
-				System.out.println("["+k+"]"+cache[k]);
-			}
+//			for(int k=0;k<list.length;k++){
+//				System.out.println("["+k+"]"+cache[k]);
+//			}
 			
 			System.out.println(result);
 			
@@ -39,13 +39,19 @@ public class PI {
 
 	private static int mem(int i) {
 		
+		
 		int mid = 987654321;
 		
-		if(cache[i] != -1) return cache[i];
+		if(cache[i] != -1) {
+//			System.out.println( " return cache["+i+"] "+cache[i]);
+			return cache[i];
+		}
 		
 		int remain = list.length -i;
 		
 		if (remain < 3 ){
+			cache[i] = mid;
+//			System.out.println( " return cache["+i+"] "+cache[i]);
 			
 			return mid;
 			
@@ -59,19 +65,25 @@ public class PI {
 
 		mid = Math.min( Math.min( cal(i,3) + mem(i+3), cal(i,4) + mem(i+4) ) , cal(i,5) + mem(i+5));
 				
+		
+//		System.out.println("cache["+i+"], remain : "+mid);
 		cache[i] = mid;
 		return mid;
 	}
 
 	private static int cal(int start, int plus) {
 		
-//		System.out.println(" start "+start+"  , plus "+plus+"   : "+list[start]+"  , "+list[start+plus-1]);
+//		System.out.println(" start "+start+"  , plus "+plus+"   : "+list[start]+"  list.length : "+list.length);
+		
+		if( (start + plus) > list.length){
+			return 777;
+		}
 		
 		// level 1
 		int num=1;
-		for(int i=start+1;i<start+plus;i++){
+		for(int i=1;i<plus;i++){
 			
-			if(list[start] != list[i] ){
+			if(list[start] != list[start+i] ){
 				break;
 			}
 			num++;
@@ -82,9 +94,10 @@ public class PI {
 		
 		// level 2
 		num = 1;
-		for(int i = 1;i<plus;i++){
-			
-			if(Math.abs(list[start]-list[i]) != i){
+		int temp = list[start]- list[start+1];
+		for(int i = 0;i<(plus-1);i++){
+			if( Math.abs(temp) != 1) break;
+			if( (list[start+i]- list[start+i+1]) != temp){
 				break;
 			}
 			num++;
@@ -94,7 +107,6 @@ public class PI {
 		// level 3,4
 		num = 1;
 		int gap = Math.abs(list[start]-list[start+1]);
-//		System.out.println("Gap is "+gap);
 		for(int i = 1;i<plus;i++){
 			
 			if(Math.abs(list[start+i-1]-list[start+i]) != gap){
@@ -103,15 +115,21 @@ public class PI {
 			num++;
 		}
 		
-//		System.out.println("num is "+num+"  plus is "+plus);
-		
 		if(num == plus){
 			
 			if( Math.abs(list[start] - list[start+plus-1]) == gap*(plus-1) ){
 				return 5;
 				
-			}else{
-				return 4;
+			}else if(list[start] == list[start+2]){
+				
+				if(plus == 3){
+					return 4;
+				}else if(plus == 4){
+					if(list[start+1] == list[start+3]) return 4;
+				}else if(plus==5){
+					if(list[start] == list[start+4] && list[start+1] == list[start+3]) return 4;
+				}
+				
 			}
 			
 		}
