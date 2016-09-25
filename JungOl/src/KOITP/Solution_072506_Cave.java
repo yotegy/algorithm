@@ -1,17 +1,22 @@
 package KOITP;
 
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Arrays;
+
 
 public class Solution_072506_Cave {
 	
 	public static int height[];
 	
-	public static void main(String args[]){
+	public static void main(String args[]) throws IOException{
 		
-		Scanner in = new Scanner(System.in);
-		
-		int n = in.nextInt();
-		int h = in.nextInt();
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+				
+		String arraynum[] = br.readLine().split(" ");
+		int n = Integer.parseInt(arraynum[0]);
+		int h = Integer.parseInt(arraynum[1]);
 		
 		int array[] = new int[n];
 		
@@ -19,13 +24,13 @@ public class Solution_072506_Cave {
 		
 		for(int i=0;i<n/2;i++){
 			
-			int down = in.nextInt();
+			int down = Integer.parseInt(br.readLine());
 			
 			for(int k=0;k<down;k++){
 				height[k]++;
 			}
 			
-			int up = in.nextInt();
+			int up = Integer.parseInt(br.readLine());
 			for(int t = h-1;t>=(h-up) ;t--){
 				height[t]++;
 			}
@@ -35,20 +40,21 @@ public class Solution_072506_Cave {
 		int min = 987654321;
 		int count = 0;
 		
-		for(int r = 0 ;r<h;r++){
+		
+		Arrays.sort(height);
+		
+		min = height[0];
+		count++;
+		for(int i=1;i<h;i++){
 			
-			if(height[r] < min ){
-				
-				count = 1;
-				min = height[r];
-				
-			}else if( height[r] == min ) {
-				
-				count++;
-				
+			if(min == height[i]) { count++; 
+			
+			}else{
+				break;
 			}
 			
 		}
+
 		
 		System.out.println(min+" "+count);
 		
